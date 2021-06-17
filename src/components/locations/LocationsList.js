@@ -21,7 +21,7 @@ export const LocationList = () => {
       <div className="locations">
         {locations.map((location) => (
           <Link to={`/locations/detail/${location.id}`} key={location.id}>
-            {location.name}
+            {location.cityName}
           </Link>
         ))}
       </div>
