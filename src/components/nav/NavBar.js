@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import { Route } from "react-router-dom";
 import "./NavBar.css";
+
+const logout = () => {
+  localStorage.removeItem("weathernet_user");
+  window.alert("user logged out");
+  window.location.href = "./login";
+};
 
 export const NavBar = (props) => {
   return (
@@ -20,6 +25,9 @@ export const NavBar = (props) => {
         <Link className="navbar__link" to="/">
           Profile
         </Link>
+      </li>
+      <li className="logout__button">
+        <button onClick={logout}>Logout</button>
       </li>
     </ul>
   );
