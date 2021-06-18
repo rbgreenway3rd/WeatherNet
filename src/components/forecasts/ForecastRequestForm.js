@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-const APIKEY = "";
+const APIKEY = "1a0c81e956eba4330e0b105645b52769";
+
 export const ForecastRequestForm = () => {
   const [city, setCity] = useState("");
   const [result, setResult] = useState({});
@@ -9,7 +10,7 @@ export const ForecastRequestForm = () => {
       return;
     }
     const res = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKEY}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKEY}&units=imperial`
     );
     const { main } = await res.json();
     setResult(main);
