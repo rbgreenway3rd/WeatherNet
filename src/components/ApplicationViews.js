@@ -6,6 +6,7 @@ import { LocationForm } from "./locations/LocationForm";
 import { LocationsDetail } from "./locations/LocationsDetail";
 import { ProfileProvider } from "./profiles/ProfilesProvider";
 import { ProfileDetail } from "./profiles/ProfileDetail";
+import { ForecastRequestForm } from "./forecasts/ForecastRequestForm";
 
 export const ApplicationViews = () => {
   return (
@@ -18,8 +19,8 @@ export const ApplicationViews = () => {
           <Route exact path="/locations/create">
             <LocationForm />
           </Route>
-          <Route exact path="/locations/detail/:locationId(\d+)">
-            <LocationsDetail />
+          <Route exact path="/locations/detail/">
+            <ForecastRequestForm />
           </Route>
         </LocationProvider>
 
