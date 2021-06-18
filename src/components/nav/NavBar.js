@@ -17,12 +17,12 @@ export const NavBar = (props) => {
         </Link>
       </li>
       <li className="navbar__item">
-        <Link className="navbar__link" to="/">
+        <Link className="navbar__link" to="/forecasts">
           Forecasts
         </Link>
       </li>
       <li className="navbar__item">
-        <Link className="navbar__link" to="/">
+        <Link className="navbar__link" to="/profile/detail">
           Profile
         </Link>
       </li>
