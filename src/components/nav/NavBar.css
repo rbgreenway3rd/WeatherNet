@@ -2,6 +2,8 @@
   display: flex;
   flex-wrap: nowrap;
   justify-content: left;
+  border: solid;
+  border-color: goldenrod;
 }
 
 .navbar__item {
