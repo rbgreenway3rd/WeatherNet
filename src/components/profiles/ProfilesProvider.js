@@ -4,11 +4,27 @@ export const ProfileContext = createContext();
 
 export const ProfileProvider = (props) => {
   const [profiles, setProfiles] = useState([]);
+  // const [currentProfile, setCurrentProfile] = useState({});
 
   const getProfiles = () => {
     return fetch("http://localhost:8088/profiles")
       .then((res) => res.json())
       .then(setProfiles);
+  };
+
+  const getProfileById = (profileId) => {
+    return fetch(`http://localhost:8088/profiles/${profileId}`).then((res) =>
+      res.json()
+    );
+  };
+
+  const getCurrentProfile = () => {
+    return fetch(
+      `http://localhost:8088/profiles/${localStorage.getItem(
+        "weathernet_user"
+      )}`
+    ).then((res) => res.json());
+    // .then(setCurrentProfile);
   };
 
   const addProfile = (profileObj) => {
@@ -27,6 +43,9 @@ export const ProfileProvider = (props) => {
         profiles,
         getProfiles,
         addProfile,
+        getCurrentProfile,
+        getProfileById,
+        // currentProfile,
       }}
     >
       {props.children}

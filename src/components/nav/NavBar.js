@@ -9,6 +9,8 @@ const logout = () => {
 };
 
 export const NavBar = (props) => {
+  const currentProfileId = localStorage.getItem("weathernet_user");
+
   return (
     <ul className="navbar">
       <li className="navbar__item active">
@@ -22,7 +24,7 @@ export const NavBar = (props) => {
         </Link>
       </li>
       <li className="navbar__item">
-        <Link className="navbar__link" to="/profile/detail">
+        <Link className="navbar__link" to={`/profile/${currentProfileId}`}>
           Profile
         </Link>
       </li>
