@@ -15,11 +15,7 @@ export const ProfileDetail = () => {
   }, [profileId]);
   //dependancy array is set to id so that useEffect is called whenever the profile id changes
 
-  //   getCurrentProfile().then(setProfile);
-  // }, []);
-
   //   debugger;
-
   return (
     <section className="profile">
       <h3 className="profile__name">{profile.name}</h3>
@@ -27,7 +23,6 @@ export const ProfileDetail = () => {
     </section>
   );
 };
-
 //   return (
 //     <section className="profile">
 //       {id.map((profile) => {

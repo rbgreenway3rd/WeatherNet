@@ -27,7 +27,7 @@ export const ApplicationViews = () => {
           </Route>
           <Route exact path="/forecasts">
             <LocationList />
-            <ForecastRequestForm />
+            
           </Route>
 
           <Route exact path="/profile/:profileId">
