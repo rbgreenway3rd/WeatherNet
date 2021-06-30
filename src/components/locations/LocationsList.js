@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import { LocationContext } from "./LocationsProvider";
-import { Link, useHistory } from "react-router-dom";
+import { ProfileContext } from "../profiles/ProfilesProvider";
+import { useHistory } from "react-router-dom";
 import "./Locations.css";
 
 const APIKEY = "1a0c81e956eba4330e0b105645b52769";
 
-
-
 export const LocationList = () => {
   const { locations, getLocations } = useContext(LocationContext);
+  const { profiles, getCurrentProfile } = useContext(ProfileContext);
   const [city, setCity] = useState("");
   const [result, setResult] = useState({});
   const [isHidden, setIsHidden] = useState(true);
+
   const getWeather = async (e) => {
     e.preventDefault();
     if (!city) {
@@ -23,11 +24,13 @@ export const LocationList = () => {
     const { main } = await res.json();
     setResult(main);
   };
-  
   useEffect(() => {
+    getCurrentProfile(profile);
+    console.log(profile);
+    getLocations(locations);
     console.log("LocationList: useEffect - getLocations");
-    getLocations();
   }, []);
+
   const history = useHistory();
 
   const showHideDiv = () => {
@@ -38,6 +41,14 @@ export const LocationList = () => {
     }
   };
 
+  //test-code for matching up location.id and profile.savedCityId
+
+  const profile = getCurrentProfile();
+
+  const savedLocation = [];
+
+  const updateSavedLocation = () => {};
+
   return (
     <>
       <h2>Locations</h2>
@@ -46,46 +57,49 @@ export const LocationList = () => {
       </button>
       <div className="locations">
         {locations.map((location) => (
-            <button type="submit" key={location.name}>{location.name}</button>
-          // <Link to={`/locations/detail/${location.id}`} key={location.id}>
-          //   {location.name}
-          // </Link>
+          <button
+            type="submit"
+            id={location.name}
+            value={location.name}
+            key={location.name}
+          >
+            {location.name}
+          </button>
         ))}
       </div>
-    <div>
-      <form onSubmit={getWeather}>
-        <div>
-          <label>city</label>
-          <input value={city} onChange={(e) => setCity(e.target.value)} />
-        </div>
-        <button type="submit">get weather</button>
-      </form>
-      {result && (
-        <div className="forecast__result">
-          <div className="forecast__result__simple">
-            <p className="forecast__result__description">Description: {result.coord}</p>
-            <p>temperature: {result.temp}</p>
-            <p>feels like: {result.feels_like}</p>
-            <p>high: {result.temp_max}</p>
-            <p>low: {result.temp_min}</p>
+      <div>
+        <form onSubmit={getWeather}>
+          <div>
+            <label>city</label>
+            <input value={city} onChange={(e) => setCity(e.target.value)} />
           </div>
-          <div className="forecast__result__advanced">
-            <button onClick={() => showHideDiv()}>
-            Show More Info:
-            </button>
-            <div hidden={isHidden}>
-              <p>humidity: {result.humidity}</p>
-              <p>visibility: {result.visibility}</p>
-              <p>wind speed: {result.speed}</p>
-              <p>pressure: {result.pressure}</p>
-              <p>sunrise: </p>
-              <p>sunset: </p>
+          <button type="submit">get weather</button>
+        </form>
+        {result && (
+          <div className="forecast__result">
+            <div className="forecast__result__simple">
+              <p className="forecast__result__description">
+                Description: {result.coord}
+              </p>
+              <p>temperature: {result.temp}</p>
+              <p>feels like: {result.feels_like}</p>
+              <p>high: {result.temp_max}</p>
+              <p>low: {result.temp_min}</p>
+            </div>
+            <div className="forecast__result__advanced">
+              <button onClick={() => showHideDiv()}>Show More Info:</button>
+              <div hidden={isHidden}>
+                <p>humidity: {result.humidity}</p>
+                <p>visibility: {result.visibility}</p>
+                <p>wind speed: {result.speed}</p>
+                <p>pressure: {result.pressure}</p>
+                <p>sunrise: </p>
+                <p>sunset: </p>
+              </div>
             </div>
           </div>
-        </div>
-        
-      )}
-    </div>
+        )}
+      </div>
     </>
   );
 };

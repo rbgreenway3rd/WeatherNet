@@ -7,7 +7,6 @@ import { LocationForm } from "./locations/LocationForm";
 import { LocationsDetail } from "./locations/LocationsDetail";
 import { ProfileProvider } from "./profiles/ProfilesProvider";
 import { ProfileDetail } from "./profiles/ProfileDetail";
-import { ForecastRequestForm } from "./forecasts/ForecastRequestForm";
 
 export const ApplicationViews = () => {
   // const currentProfileId = localStorage.getItem("weathernet_user");
@@ -27,11 +26,9 @@ export const ApplicationViews = () => {
           </Route>
           <Route exact path="/forecasts">
             <LocationList />
-            
           </Route>
 
           <Route exact path="/profile/:profileId">
-            
             <ProfileDetail />
           </Route>
         </LocationProvider>
