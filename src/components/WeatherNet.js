@@ -5,7 +5,6 @@ import { ApplicationViews } from "./ApplicationViews";
 import { Route, Redirect } from "react-router-dom";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
-import "./WeatherNet.css";
 
 export const WeatherNet = () => (
   <>

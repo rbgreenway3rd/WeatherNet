@@ -7,8 +7,10 @@ import "./Locations.css";
 const APIKEY = "1a0c81e956eba4330e0b105645b52769";
 
 export const LocationList = () => {
-  const { locations, getLocations } = useContext(LocationContext);
-  const { profiles, getCurrentProfile } = useContext(ProfileContext);
+  const { locations, getLocations, deleteLocation } =
+    useContext(LocationContext);
+  const { profiles, getProfiles } = useContext(ProfileContext);
+  let { profile, getCurrentProfile } = useContext(ProfileContext);
   const [city, setCity] = useState("");
   const [result, setResult] = useState({});
   const [isHidden, setIsHidden] = useState(true);
@@ -24,12 +26,6 @@ export const LocationList = () => {
     const { main } = await res.json();
     setResult(main);
   };
-  useEffect(() => {
-    getCurrentProfile(profile);
-    console.log(profile);
-    getLocations(locations);
-    console.log("LocationList: useEffect - getLocations");
-  }, []);
 
   const history = useHistory();
 
@@ -41,13 +37,35 @@ export const LocationList = () => {
     }
   };
 
+  useEffect(() => {
+    console.log("LocationList: useEffect - getLocations");
+    getLocations();
+  }, []);
+
+  useEffect(() => {
+    console.log("LocationList: useEffect - getProfiles");
+    getProfiles();
+  }, []);
+
+  useEffect(() => {
+    console.log("LocationList: useEffect - getCurrentProfile");
+    getCurrentProfile(profile);
+  }, []);
+
+  // useEffect(() => {
+  //   console.log("LocationList: useEffect - deleteLocation");
+  //   deleteLocation();
+  // });
+
   //test-code for matching up location.id and profile.savedCityId
 
-  const profile = getCurrentProfile();
-
-  const savedLocation = [];
-
-  const updateSavedLocation = () => {};
+  // const buttonList = profile.savedCityId.map((cityId) => {
+  //   locations.map((loc) => {
+  //     if (cityId === loc.id) {
+  //       return loc.name;
+  //     }
+  //   });
+  // });
 
   return (
     <>
@@ -55,17 +73,30 @@ export const LocationList = () => {
       <button onClick={() => history.push("/locations/create")}>
         Add Location
       </button>
-      <div className="locations">
+      <div className="location__buttons">
         {locations.map((location) => (
           <button
             type="submit"
             id={location.name}
-            value={location.name}
+            value={city}
             key={location.name}
           >
             {location.name}
           </button>
         ))}
+        {/* <div className="location__buttons__delete">
+          {locations.map((location) => (
+            <button
+              onClick={deleteLocation(location.id)}
+              type="button"
+              id={location.id}
+              value={location.id}
+              key={location.id}
+            >
+              Delete Location
+            </button>
+          ))}
+        </div> */}
       </div>
       <div>
         <form onSubmit={getWeather}>

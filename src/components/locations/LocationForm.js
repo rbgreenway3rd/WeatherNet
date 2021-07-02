@@ -41,7 +41,8 @@ export const LocationForm = () => {
     } else {
       const newLocation = {
         name: location.name,
-        zipcode: location.address,
+        zipcode: location.zipcode,
+        id: "",
       };
       addLocation(newLocation).then(() => history.push("/locations"));
     }
@@ -67,7 +68,7 @@ export const LocationForm = () => {
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="address">Location Zipcode:</label>
+          <label htmlFor="address">Location Zipcode: optional</label>
           <input
             type="text"
             id="address"

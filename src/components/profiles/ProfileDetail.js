@@ -4,8 +4,8 @@ import "./Profiles.css";
 import { useParams } from "react-router-dom";
 
 export const ProfileDetail = () => {
-  const { getProfileById } = useContext(ProfileContext);
-  const [profile, setProfile] = useState({});
+  const { getProfileById, profiles } = useContext(ProfileContext);
+  const [profile, setProfile] = useState({ email: [] });
 
   const { profileId } = useParams();
 
@@ -23,21 +23,3 @@ export const ProfileDetail = () => {
     </section>
   );
 };
-//   return (
-//     <section className="profile">
-//       {id.map((profile) => {
-//         return (
-//           <div
-//             className="profile"
-//             id={`profile--${profile.id}`}
-//             key={`${profile.id}`}
-//           >
-//             <div className="profile__content">
-//               <div className="profile__email">email:{profile.email}</div>
-//             </div>
-//           </div>
-//         );
-//       })}
-//     </section>
-//   );
-// };
