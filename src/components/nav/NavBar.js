@@ -28,6 +28,11 @@ export const NavBar = (props) => {
           Profile
         </Link>
       </li>
+      <li className="navbar__item">
+        <Link className="navbar__link" to={`/locations/detail`}>
+          Locations
+        </Link>
+      </li>
       <li className="logout__button">
         <button onClick={logout}>Logout</button>
       </li>

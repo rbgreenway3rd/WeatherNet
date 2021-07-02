@@ -4,7 +4,8 @@ import "./Locations.css";
 import { useParams } from "react-router-dom";
 
 export const LocationsDetail = () => {
-  const { getLocationById, locations } = useContext(LocationContext);
+  const { getLocationById, locations, deleteLocation } =
+    useContext(LocationContext);
   const [location, setLocation] = useState({ zipcode: {} });
   const [isHidden, setIsHidden] = useState(true);
   const { locationId } = useParams();
@@ -26,15 +27,15 @@ export const LocationsDetail = () => {
   //   debugger;
 
   return (
-    <section className="location">
-      <h3 className="location__name">{location.name}</h3>
-      {/* <div className="location__zipcode">
-        Location Zipcode: {location.zipcode}
-        <button onClick={() => showHideDiv()}>
-          click here to see forecast!
-        </button>
-        <div hidden={isHidden}>this is a div</div>
-      </div> */}
+    <section className="location__collection">
+      <h3 className="location__list">
+        {locations.map((location) => (
+          <div className="location" key={location.name} id={location.id}>
+            {location.name}
+            <button>Delete Location</button>
+          </div>
+        ))}
+      </h3>
     </section>
   );
 };

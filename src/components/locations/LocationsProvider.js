@@ -13,9 +13,23 @@ export const LocationProvider = (props) => {
       .then(setLocations);
   };
 
+  // const getLocations1 = (response) => {
+  //   console.log(response)
+  // };
+
   const addLocation = (locationObj) => {
     return fetch("http://localhost:8088/locations", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(locationObj),
+    }).then(getLocations());
+  };
+
+  const deleteLocation = (locationObj) => {
+    return fetch("http://localhost:8088/locations/(+d)", {
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
@@ -34,6 +48,7 @@ export const LocationProvider = (props) => {
         getLocations,
         addLocation,
         getLocationById,
+        deleteLocation,
       }}
     >
       {props.children}
