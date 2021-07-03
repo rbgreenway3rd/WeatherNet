@@ -10,3 +10,9 @@
   padding: 1em;
   border: 1px solid goldenrod;
 }
+
+.location__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}

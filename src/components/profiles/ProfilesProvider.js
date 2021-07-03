@@ -9,27 +9,18 @@ export const ProfileProvider = (props) => {
   const getProfiles = () => {
     return fetch("http://localhost:8088/profiles?_embed=locations")
       .then((res) => res.json())
-      .then(setProfiles)
+      .then((theProfiles) => setProfiles(theProfiles))
       .then(console.log(profiles));
   };
 
   const getCurrentProfile = () => {
     let id = localStorage.getItem("weathernet_user");
-    console.log("............");
-    fetch("http://localhost:8088/profiles?_embed=locations")
+    return fetch(`http://localhost:8088/profiles/${id}`)
       .then((res) => res.json())
-      .then(setProfiles);
-    console.log("profiles = ", profiles);
-
-    profiles.map((p) => {
-      console.log("p.id = ", p.id, "   id = ", id);
-      if (p.id === parseInt(id)) {
-        console.log(" found = ", p);
-        setCurrentProfile(p);
-      }
-    });
-    console.log("current Profile = ", currentProfile);
-    console.log(".............................");
+      .then((theProfile) => {
+        return setCurrentProfile(theProfile);
+      })
+      .then(console.log(currentProfile));
   };
 
   const getProfileById = (profileId) => {
@@ -37,13 +28,6 @@ export const ProfileProvider = (props) => {
       res.json()
     );
   };
-
-  // const getCurrentProfile = () => {
-  //   console.log(localStorage.getItem("weathernet_user"));
-  //   return fetch(
-  //     `http://localhost:3000/profile/${localStorage.getItem("weathernet_user")}`
-  //   ).then((res) => res.json());
-  // };
 
   const addProfile = (profileObj) => {
     return fetch("http://localhost:8088/profiles", {
