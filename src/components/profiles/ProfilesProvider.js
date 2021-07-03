@@ -7,7 +7,7 @@ export const ProfileProvider = (props) => {
   const [currentProfile, setCurrentProfile] = useState({});
 
   const getProfiles = () => {
-    return fetch("http://localhost:8088/profiles?_embed=locations")
+    return fetch("http://localhost:8088/profiles")
       .then((res) => res.json())
       .then((theProfiles) => setProfiles(theProfiles))
       .then(console.log(profiles));

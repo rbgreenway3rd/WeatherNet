@@ -20,18 +20,22 @@ export const LocationList = () => {
   const history = useHistory();
 
   useEffect(() => {
-    Promise.all([getLocations(), getProfiles(), getCurrentProfile()]).then(
-      () => {
-        setCurrentProfile();
-        console.log(currentProfile);
-        setButtonList(
-          currentProfile.savedCityId.map((cityId) => {
-            return locations.find((location) => location.id === cityId);
-          })
-        );
-      }
-    );
+    Promise.all([
+      getLocations(),
+      getProfiles(),
+      getCurrentProfile(),
+      setCurrentProfile(),
+    ]).then(() => {
+      console.log(currentProfile);
+      setButtonList(locationResults);
+      console.log(buttonList);
+      console.log(locationResults);
+    });
   }, []);
+
+  const locationResults = (currentProfile.savedCityId || []).map((cityId) => {
+    return locations.find((location) => location.id === cityId);
+  });
 
   const showHideDiv = () => {
     if (isHidden === true) {
@@ -71,18 +75,6 @@ export const LocationList = () => {
             {location.name}
           </button>
         ))}
-        <div className="location__buttons__delete">
-          {/* {locations.map((location) => (
-            <button
-              type="button"
-              id={location.id}
-              value={location.id}
-              key={location.id}
-            >
-              Delete Location
-            </button>
-          ))} */}
-        </div>
       </div>
       <div>
         <form onSubmit={getWeather}>
