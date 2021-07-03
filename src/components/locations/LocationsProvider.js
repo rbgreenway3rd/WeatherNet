@@ -10,7 +10,7 @@ export const LocationProvider = (props) => {
   let id = localStorage.getItem("weathernet_user");
 
   const getLocations = () => {
-    return fetch("http://localhost:8088/locations?_embed=profiles")
+    return fetch("http://localhost:8088/locations")
       .then((res) => res.json())
       .then(setLocations);
   };
