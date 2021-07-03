@@ -7,6 +7,8 @@ export const LocationProvider = (props) => {
   const locationsURL = apiURL + "/locations";
   const [locations, setLocations] = useState([]);
 
+  let id = localStorage.getItem("weathernet_user");
+
   const getLocations = () => {
     return fetch("http://localhost:8088/locations?_embed=profiles")
       .then((res) => res.json())
