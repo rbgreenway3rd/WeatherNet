@@ -7,18 +7,20 @@ export const LocationProvider = (props) => {
   const locationsURL = apiURL + "/locations";
   const [locations, setLocations] = useState([]);
 
-  let id = localStorage.getItem("weathernet_user");
-
   const getLocations = () => {
     return fetch("http://localhost:8088/locations")
       .then((res) => res.json())
-      .then(setLocations);
+
+      .then((re) => {
+        setLocations(re);
+        console.log(re, "this is re=====>");
+      });
   };
 
-  // const getLocations1 = (response) => {
-  //   console.log(response)
-  // };
+  console.log(locations, "locationsProvider===>");
 
+  // if(locations.length>0&&  locations&&location)
+  // {locations.length>0&&  locations&&location?locations.map:"loading..."}
   const addLocation = (locationObj) => {
     return fetch("http://localhost:8088/locations", {
       method: "POST",
@@ -29,15 +31,23 @@ export const LocationProvider = (props) => {
     }).then(getLocations());
   };
 
-  const deleteLocation = (locationObj) => {
-    return fetch("http://localhost:8088/locations/(+d)", {
+  const deleteLocation = (locationId) => {
+    return fetch(`http://localhost:8088/locations/${locationId}`, {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(locationObj),
     }).then(getLocations);
   };
+
+  // const deleteLocation = (locationObj) => {
+  //   return fetch("http://localhost:8088/locations/(+d)", {
+  //     method: "DELETE",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(locationObj),
+  //   })
+  //     .then((res) => res.json())
+  //     .then(getLocations);
+  // };
 
   const getLocationById = () => {
     return fetch(locationsURL + "?_embed=profiles").then((res) => res.json());

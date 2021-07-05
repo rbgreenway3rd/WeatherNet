@@ -10,18 +10,27 @@ export const ProfileProvider = (props) => {
     return fetch("http://localhost:8088/profiles")
       .then((res) => res.json())
       .then((theProfiles) => setProfiles(theProfiles))
-      .then(console.log(profiles));
+      .then(console.log(profiles, "this is profiles =====>"));
   };
 
   const getCurrentProfile = () => {
     let id = localStorage.getItem("weathernet_user");
     return fetch(`http://localhost:8088/profiles/${id}`)
       .then((res) => res.json())
-      .then((theProfile) => {
-        return setCurrentProfile(theProfile);
-      })
-      .then(console.log(currentProfile));
+      .then((re) => {
+        setCurrentProfile(re);
+      });
   };
+
+  // const getCurrentProfile = (profiles) => {
+  //   let id = localStorage.getItem("weathernet_user");
+  //   let p = profiles.map((profile) => {
+  //     return
+  //     if (profile.id === id) return profile;
+  //   });
+  //   setCurrentProfile(p);
+  //   console.log("getCurrentProfile", profiles);
+  // };
 
   const getProfileById = (profileId) => {
     return fetch(`http://localhost:8088/profiles/${profileId}`).then((res) =>
