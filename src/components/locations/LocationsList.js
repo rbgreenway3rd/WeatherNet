@@ -39,15 +39,15 @@ export const LocationList = () => {
       return locations.find((location) => location.id === cityId);
     });
 
-    return locationResults.map((loc) => (
+    return locationResults.map((location) => (
       <button
         classame="location__buttons"
         type="submit"
-        id={loc.name}
+        id={location.name}
         value={city}
-        key={loc.name}
+        key={location.name}
       >
-        {loc.name}
+        {location.name}
       </button>
     ));
   };

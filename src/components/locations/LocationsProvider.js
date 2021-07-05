@@ -6,6 +6,8 @@ export const LocationProvider = (props) => {
   const apiURL = "http://localhost:8088";
   const locationsURL = apiURL + "/locations";
   const [locations, setLocations] = useState([]);
+  const [profiles, setProfiles] = useState([]);
+  const [currentProfile, setCurrentProfile] = useState({});
 
   const getLocations = () => {
     return fetch("http://localhost:8088/locations")
@@ -21,6 +23,7 @@ export const LocationProvider = (props) => {
 
   // if(locations.length>0&&  locations&&location)
   // {locations.length>0&&  locations&&location?locations.map:"loading..."}
+
   const addLocation = (locationObj) => {
     return fetch("http://localhost:8088/locations", {
       method: "POST",
@@ -31,11 +34,44 @@ export const LocationProvider = (props) => {
     }).then(getLocations());
   };
 
-  const deleteLocation = (locationId) => {
-    return fetch(`http://localhost:8088/locations/${locationId}`, {
-      method: "DELETE",
-    }).then(getLocations);
+  const deleteLocationFromProfile = (prof, id) => {
+    let index = prof.savedCityId.indexOf(id);
+    if (index > -1) {
+      prof.savedCityId.splice(index, 1);
+    }
   };
+
+  const deleteLocation = (locationId) => {
+    return fetch("http://localhost:8088/profiles")
+      .then((res) => res.json())
+      .then((re) => {
+        setProfiles(re);
+      });
+  };
+
+  //       profiles.map((p) => {
+  //         let index = p.savedCityId.indexOf(locationId);
+  //         if (index > -1) {
+  //           p.savedCityId.splice(index, 1);
+  //         }
+  //       })
+  //     )
+  //     .then(
+  //       fetch("http://localhost:8088/profiles", {
+  //         method: "PUT",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(profiles),
+  //       })
+  //     );
+  // };
+  //       )`http://localhost:8088/locations/${locationId}`,
+  //     {
+  //       method: "DELETE",
+  //     }.then(getLocations)
+  //   );
+  // };
 
   // const deleteLocation = (locationObj) => {
   //   return fetch("http://localhost:8088/locations/(+d)", {
@@ -61,6 +97,7 @@ export const LocationProvider = (props) => {
         addLocation,
         getLocationById,
         deleteLocation,
+        deleteLocationFromProfile,
       }}
     >
       {props.children}
