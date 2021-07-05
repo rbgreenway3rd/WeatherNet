@@ -11,7 +11,7 @@ export const LocationList = () => {
     useContext(LocationContext);
   const { profiles, getProfiles, currentProfile, getCurrentProfile } =
     useContext(ProfileContext);
-  const [profile, setCurrentProfile] = useState({});
+
   const [city, setCity] = useState("");
   const [result, setResult] = useState({});
   const [isHidden, setIsHidden] = useState(true);
@@ -19,23 +19,38 @@ export const LocationList = () => {
 
   const history = useHistory();
 
-  useEffect(() => {
-    Promise.all([
-      getLocations(),
-      getProfiles(),
-      getCurrentProfile(),
-      setCurrentProfile(),
-    ]).then(() => {
-      console.log(currentProfile);
-      setButtonList(locationResults);
-      console.log(buttonList);
-      console.log(locationResults);
-    });
+  useEffect(async () => {
+    Promise.all([getLocations(), getProfiles(), getCurrentProfile()]).then(
+      () => {
+        console.log(currentProfile);
+
+        console.log(buttonList);
+        //console.log(locationResults);
+      }
+    );
   }, []);
 
-  const locationResults = (currentProfile.savedCityId || []).map((cityId) => {
-    return locations.find((location) => location.id === cityId);
-  });
+  // const locationResults = (currentProfile.savedCityId || []).map((cityId) => {
+  //   return locations.find((location) => location.id === cityId);
+  // });
+
+  const renderButtons = () => {
+    const locationResults = (currentProfile.savedCityId || []).map((cityId) => {
+      return locations.find((location) => location.id === cityId);
+    });
+
+    return locationResults.map((loc) => (
+      <button
+        classame="location__buttons"
+        type="submit"
+        id={loc.name}
+        value={city}
+        key={loc.name}
+      >
+        {loc.name}
+      </button>
+    ));
+  };
 
   const showHideDiv = () => {
     if (isHidden === true) {
@@ -64,17 +79,7 @@ export const LocationList = () => {
         Add Location
       </button>
       <div className="location__buttons">
-        {buttonList.map((location) => (
-          <button
-            classame="location__buttons"
-            type="submit"
-            id={location.name}
-            value={city}
-            key={location.name}
-          >
-            {location.name}
-          </button>
-        ))}
+        {currentProfile.savedCityId && renderButtons()}
       </div>
       <div>
         <form onSubmit={getWeather}>
