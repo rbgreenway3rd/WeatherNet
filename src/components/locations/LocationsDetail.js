@@ -1,11 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { LocationContext } from "./LocationsProvider";
+import { ProfileContext } from "../profiles/ProfilesProvider";
 import "./Locations.css";
 import { useParams } from "react-router-dom";
 
 export const LocationsDetail = () => {
-  const { getLocationById, locations, deleteLocation, getLocations } =
-    useContext(LocationContext);
+  const {
+    getLocationById,
+    locations,
+    deleteLocation,
+    deleteLocationFromProfile,
+    getLocations,
+  } = useContext(LocationContext);
+  const { currentProfile, getCurrentProfile, updateProfile } =
+    useContext(ProfileContext);
   const [location, setLocation] = useState({ zipcode: {} });
   const [isHidden, setIsHidden] = useState(true);
   const { locationId } = useParams();
@@ -20,24 +28,42 @@ export const LocationsDetail = () => {
 
   useEffect(() => {
     getLocations();
+    getCurrentProfile();
+  }, []);
 
-    getLocationById(locationId).then((thisLocation) =>
-      setLocation(thisLocation)
-    );
-  }, [locationId]);
+  const handleDeleteLocation = (id) => {
+    deleteLocationFromProfile(currentProfile, id);
+    updateProfile(currentProfile);
+  };
 
-  //   debugger;
+  const renderLocations = () => {
+    const locationResults = (currentProfile.savedCityId || []).map((cityId) => {
+      return locations.find((location) => location.id === cityId);
+    });
+
+    return locationResults.map((location) => (
+      <section
+        classame="location__buttons"
+        id={location.id}
+        key={location.name}
+      >
+        {location.name}
+        <button
+          id={location.id}
+          onClick={() => handleDeleteLocation(location.id)}
+        >
+          Delete Location
+        </button>
+      </section>
+    ));
+  };
 
   return (
-    <section className="location__collection">
-      <h3 className="location__list">
-        {locations.map((location) => (
-          <div className="location" key={location.name} id={location.id}>
-            {location.name}
-            <button>Delete Location</button>
-          </div>
-        ))}
-      </h3>
-    </section>
+    <>
+      <h2 className="location__list">Locations</h2>
+      <div className="location__list__items">
+        {currentProfile.savedCityId && renderLocations()}
+      </div>
+    </>
   );
 };

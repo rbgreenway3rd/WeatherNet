@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { LocationContext } from "./LocationsProvider";
+import { ProfileContext } from "../profiles/ProfilesProvider";
 import "./Locations.css";
 import { useHistory } from "react-router-dom";
 
 export const LocationForm = () => {
   const { addLocation } = useContext(LocationContext);
   const { locations, getLocations } = useContext(LocationContext);
+  const { addLocationToProfile } = useContext(ProfileContext);
 
   const [location, setLocation] = useState({
     name: "",
@@ -36,15 +38,17 @@ export const LocationForm = () => {
   const handleClickSaveLocation = (event) => {
     event.preventDefault(); //Prevents the browser from submitting the form
 
-    if (location.name === "" || location.zipcode === "") {
-      window.alert("Please fill in all fields");
+    if (location.name === "") {
+      window.alert("Please Give a Name for the New Location");
     } else {
       const newLocation = {
         name: location.name,
         zipcode: location.zipcode,
         id: "",
       };
-      addLocation(newLocation).then(() => history.push("/locations"));
+      addLocation(newLocation)
+        .then(addLocationToProfile(newLocation.id))
+        .then(() => history.push("/forecasts"));
     }
   };
 
