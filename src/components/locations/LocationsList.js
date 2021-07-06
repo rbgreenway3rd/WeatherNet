@@ -8,15 +8,13 @@ import "./LocationForm.css";
 const APIKEY = "1a0c81e956eba4330e0b105645b52769";
 
 export const LocationList = () => {
-  const { locations, getLocations, deleteLocation, getMatchedLocations } =
-    useContext(LocationContext);
+  const { getLocations, getMatchedLocations } = useContext(LocationContext);
   const { profiles, getProfiles, currentProfile, getCurrentProfile } =
     useContext(ProfileContext);
 
   const [city, setCity] = useState("");
   const [result, setResult] = useState({});
   const [isHidden, setIsHidden] = useState(true);
-  const [buttonList, setButtonList] = useState([]);
   const [matchedLocations, setMatchedLocations] = useState([]);
 
   const history = useHistory();
@@ -30,37 +28,8 @@ export const LocationList = () => {
         setMatchedLocations(matchedLocationsResults);
       })
     );
-    // [getLocations(), getCurrentProfile()].then(
-    //   () => {
-    //     console.log(currentProfile);
-
-    //     console.log(buttonList);
-    //     //console.log(locationResults);
-    //   }
-    // );
   }, []);
-  console.log(matchedLocations);
-
-  // const renderButtons = () => {
-  //   const locationResults = (currentProfile.savedCityId || []).map((cityId) => {
-  //     const renderButtonsArray = locations.find(
-  //       (location) => location.id === cityId
-  //     );
-  //     return renderButtonsArray;
-  //   });
-
-  //   return locationResults.map((location) => (
-  //     <button
-  //       classame="location__buttons"
-  //       type="submit"
-  //       id={location.name}
-  //       value={city}
-  //       key={location.name}
-  //     >
-  //       {location.name}
-  //     </button>
-  //   ));
-  // };
+  console.log("matched locations: LocList ===>", matchedLocations);
 
   const showHideDiv = () => {
     if (isHidden === true) {
@@ -95,9 +64,10 @@ export const LocationList = () => {
         <section className="forecast__form__page">
           <h2>Forecasts</h2>
           <div className="location__buttons">
-            {/* {currentProfile.savedCityId && renderButtons()} */}
             {matchedLocations.map((locationMatch) => {
-              return <button>{locationMatch.name}</button>;
+              return (
+                <button key={locationMatch.name}>{locationMatch.name}</button>
+              );
             })}
           </div>
           <div className="forecast__form">

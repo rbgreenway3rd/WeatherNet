@@ -1,0 +1,15 @@
+.location__buttons {
+  display: flex;
+  align-items: center;
+  flex-wrap: row;
+}
+
+.location__buttons__name {
+  justify-content: center;
+}
+
+.location__buttons__delete {
+  width: 5em;
+  height: 3em;
+  font-size: 0.5em;
+}
