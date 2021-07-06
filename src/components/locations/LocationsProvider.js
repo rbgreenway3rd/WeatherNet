@@ -18,18 +18,25 @@ export const LocationProvider = (props) => {
   };
 
   const addLocation = (locationObj) => {
-    return fetch("http://localhost:8088/locations", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(locationObj),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        getLocations();
-        return res.id;
-      });
+    return (
+      fetch("http://localhost:8088/locations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(locationObj),
+      })
+        .then((res) => res.json())
+        // .then((res) => {
+        //   locationObj.id = res.id;
+        // })
+        .then((res) => {
+          getLocations();
+          locationObj.id = res.id;
+          console.log(res.id);
+          return res.id;
+        })
+    );
   };
 
   const deleteLocationFromProfile = (prof, id) => {
@@ -62,6 +69,26 @@ export const LocationProvider = (props) => {
     return fetch(locationsURL + "?_embed=profiles").then((res) => res.json());
   };
 
+  const addLocationToLocationMatcher = (locId) => {
+    let id = localStorage.getItem("weathernet_user");
+    console.log(locId);
+    let obj = {
+      id: 0,
+      profileId: parseInt(id),
+      locationId: locId,
+    };
+    return fetch(
+      `http://localhost:8088/locationMatcher?profileId=${id}&_expand=location`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(obj),
+      }
+    );
+  };
+
   return (
     <LocationContext.Provider
       value={{
@@ -72,6 +99,7 @@ export const LocationProvider = (props) => {
         deleteLocation,
         deleteLocationFromProfile,
         getMatchedLocations,
+        addLocationToLocationMatcher,
       }}
     >
       {props.children}

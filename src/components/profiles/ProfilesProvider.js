@@ -34,16 +34,6 @@ export const ProfileProvider = (props) => {
       .then(getCurrentProfile);
   };
 
-  // const getCurrentProfile = (profiles) => {
-  //   let id = localStorage.getItem("weathernet_user");
-  //   let p = profiles.map((profile) => {
-  //     return
-  //     if (profile.id === id) return profile;
-  //   });
-  //   setCurrentProfile(p);
-  //   console.log("getCurrentProfile", profiles);
-  // };
-
   const getProfileById = (profileId) => {
     return fetch(`http://localhost:8088/profiles/${profileId}`).then((res) =>
       res.json()

@@ -7,18 +7,20 @@ import { useHistory } from "react-router-dom";
 
 export const LocationForm = () => {
   const { addLocation } = useContext(LocationContext);
-  const { locations, getLocations } = useContext(LocationContext);
+  const { locations, getLocations, addLocationToLocationMatcher } =
+    useContext(LocationContext);
   const { addLocationToProfile, currentProfile, getCurrentProfile } =
     useContext(ProfileContext);
 
   const [location, setLocation] = useState({
     name: "",
+    profileId: 0,
   });
 
   const history = useHistory();
 
   useEffect(async () => {
-    Promise.all([getCurrentProfile()]);
+    getCurrentProfile();
     console.log("inside useEffect");
   }, []);
 
@@ -42,17 +44,18 @@ export const LocationForm = () => {
   const handleClickSaveLocation = (event) => {
     event.preventDefault(); //Prevents the browser from submitting the form
 
+    // const locationId = parseInt(location.id)
+    // const profileId = parseInt(profile.id)
+
     if (location.name === "") {
       window.alert("Please Give a Name for the New Location");
     } else {
       let newLocation = {
         name: location.name,
-
-        id: 0,
       };
       addLocation(newLocation)
         .then(console.log(newLocation, "LocationForm handleClickSaveLocation"))
-        .then(addLocationToProfile(newLocation.id));
+        .then(addLocationToLocationMatcher(newLocation.id));
     }
   };
 
