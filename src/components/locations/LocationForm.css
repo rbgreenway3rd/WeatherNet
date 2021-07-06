@@ -1,0 +1,51 @@
+.forecast__form__page {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: "https://st.depositphotos.com/1006472/4297/v/600/depositphotos_42970463-stock-video-weather-forecast-background-time-lapse.jpg";
+}
+
+.forecast__form {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 2em;
+  padding: 1em;
+  border: 1px solid goldenrod;
+  background-color: rgb(250, 239, 211);
+}
+
+.forecast__form__submit {
+  padding-bottom: 0.25em;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.forecast__city__input__div {
+  padding-bottom: 0.25em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.forecast__result__simple {
+  align-content: left;
+  justify-content: left;
+}
+
+.location__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 1em;
+}
+
+.forecast__background {
+  background-image: url("https://st.depositphotos.com/1006472/4297/v/600/depositphotos_42970463-stock-video-weather-forecast-background-time-lapse.jpg");
+  background-size: contain;
+  height: 100%;
+}
