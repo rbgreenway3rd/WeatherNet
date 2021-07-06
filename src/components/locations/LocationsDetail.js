@@ -3,6 +3,7 @@ import { LocationContext } from "./LocationsProvider";
 import { ProfileContext } from "../profiles/ProfilesProvider";
 import "./Locations.css";
 import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export const LocationsDetail = () => {
   const {
@@ -17,6 +18,8 @@ export const LocationsDetail = () => {
   const [location, setLocation] = useState({ zipcode: {} });
   const [isHidden, setIsHidden] = useState(true);
   const { locationId } = useParams();
+
+  const history = useHistory();
 
   const showHideDiv = () => {
     if (isHidden === true) {
@@ -61,6 +64,9 @@ export const LocationsDetail = () => {
   return (
     <>
       <h2 className="location__list">Locations</h2>
+      <button onClick={() => history.push("/locations/create")}>
+        Add Location
+      </button>
       <div className="location__list__items">
         {currentProfile.savedCityId && renderLocations()}
       </div>

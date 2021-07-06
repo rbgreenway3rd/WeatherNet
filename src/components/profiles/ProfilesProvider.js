@@ -62,7 +62,7 @@ export const ProfileProvider = (props) => {
 
   const addLocationToProfile = (id) => {
     getCurrentProfile()
-      .then(currentProfile.savedLocationId.push(id))
+      .then(currentProfile.savedCityId.push(id))
       .then(updateProfile(currentProfile))
       .then(getProfiles())
       .then(getCurrentProfile());
