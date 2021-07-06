@@ -9,7 +9,7 @@ export const LocationProvider = (props) => {
   const [profiles, setProfiles] = useState([]);
 
   const getLocations = () => {
-    return fetch("http://localhost:8088/locations")
+    return fetch("http://localhost:8088/locations?")
       .then((res) => res.json())
 
       .then((re) => {
@@ -31,10 +31,8 @@ export const LocationProvider = (props) => {
         //   locationObj.id = res.id;
         // })
         .then((res) => {
+          addLocationToLocationMatcher(res.id);
           getLocations();
-          locationObj.id = res.id;
-          console.log(res.id);
-          return res.id;
         })
     );
   };

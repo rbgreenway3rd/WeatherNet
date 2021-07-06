@@ -53,9 +53,7 @@ export const LocationForm = () => {
       let newLocation = {
         name: location.name,
       };
-      addLocation(newLocation)
-        .then(console.log(newLocation, "LocationForm handleClickSaveLocation"))
-        .then(addLocationToLocationMatcher(newLocation.id));
+      addLocation(newLocation);
     }
   };
 
