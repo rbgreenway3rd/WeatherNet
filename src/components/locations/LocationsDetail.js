@@ -35,9 +35,14 @@ export const LocationsDetail = () => {
     );
   }, []);
 
+  const refreshPage = () => {
+    window.location.reload();
+  };
   // let matchedLocationToDelete = {};
   const handleDeleteLocation = (id) => {
-    deleteLocation(id).then(() => getMatchedLocations());
+    deleteLocation(id)
+      .then(() => getMatchedLocations())
+      .then(() => refreshPage());
 
     // getMatchedLocations().then((res) => {
     //   matchedLocationToDelete = res.map((matchedLocationToDeleteResult) => {
