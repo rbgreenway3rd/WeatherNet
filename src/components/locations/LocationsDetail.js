@@ -9,7 +9,6 @@ import { useHistory } from "react-router-dom";
 export const LocationsDetail = () => {
   const { deleteLocation, getLocations, getMatchedLocations } =
     useContext(LocationContext);
-  const { currentProfile, updateProfile } = useContext(ProfileContext);
 
   const [isHidden, setIsHidden] = useState(true);
   const [matchedLocations, setMatchedLocations] = useState([]);
@@ -38,31 +37,12 @@ export const LocationsDetail = () => {
   const refreshPage = () => {
     window.location.reload();
   };
-  // let matchedLocationToDelete = {};
+
   const handleDeleteLocation = (id) => {
     deleteLocation(id)
       .then(() => getMatchedLocations())
       .then(() => refreshPage());
-
-    // getMatchedLocations().then((res) => {
-    //   matchedLocationToDelete = res.map((matchedLocationToDeleteResult) => {
-    //     if (matchedLocationToDeleteResult.locationId === id) {
-    //       return matchedLocationToDeleteResult;
-    //     }
-    //   });
-    //   console.log(matchedLocationToDelete);
-    // });
-    // deleteLocationFromProfile(currentProfile, id)
-
-    // deleteLocationFromLocationMatcher(matchedLocationToDelete.id).then(() =>
-    //   updateProfile(currentProfile)
-    // );
   };
-
-  // const renderLocations = () => {
-  //   const locationResults = (currentProfile.savedCityId || []).map((cityId) => {
-  //     return locations.find((location) => location.id === cityId);
-  //   });
 
   return (
     <>
@@ -97,37 +77,3 @@ export const LocationsDetail = () => {
     </>
   );
 };
-// <button
-//   id={locationMatch.id}
-//   onClick={() => handleDeleteLocation(locationMatch.id)}
-// >
-//   Delete Location
-// </button>
-
-//     return locationResults.map((location) => (
-//       <section
-//         classame="location__buttons"
-//         id={location.id}
-//         key={location.name}
-//       >
-//         {location.name}
-{
-  /* <button id={location.id} onClick={() => handleDeleteLocation(location.id)}>
-  Delete Location
-</button>; */
-}
-//       </section>
-//     ));
-//   };
-
-//   return (
-{
-  /* <>
-  <h2 className="location__list">Locations</h2>
-  <div className="location__list__items">
-    {currentProfile.savedCityId && renderLocations()}
-  </div>
-</>; */
-}
-//   );
-// };

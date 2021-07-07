@@ -6,7 +6,6 @@ export const LocationProvider = (props) => {
   const apiURL = "http://localhost:8088";
   const locationsURL = apiURL + "/locations";
   const [locations, setLocations] = useState([]);
-  const [profiles, setProfiles] = useState([]);
 
   const getLocations = () => {
     return fetch("http://localhost:8088/locations?")
@@ -18,31 +17,19 @@ export const LocationProvider = (props) => {
   };
 
   const addLocation = (locationObj) => {
-    return (
-      fetch("http://localhost:8088/locations", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(locationObj),
-      })
-        .then((res) => res.json())
-        // .then((res) => {
-        //   locationObj.id = res.id;
-        // })
-        .then((res) => {
-          addLocationToLocationMatcher(res.id);
-          getLocations();
-        })
-    );
+    return fetch("http://localhost:8088/locations", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(locationObj),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        addLocationToLocationMatcher(res.id);
+        getLocations();
+      });
   };
-
-  // const deleteLocationFromProfile = () => {
-  //   const id = localStorage.getItem("weathernet_user");
-  //   return fetch(``, {
-  //     method: "DELETE",
-  //   }).then();
-  // };
 
   const getMatchedLocations = () => {
     const id = localStorage.getItem("weathernet_user");
