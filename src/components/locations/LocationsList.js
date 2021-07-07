@@ -9,15 +9,11 @@ const APIKEY = "1a0c81e956eba4330e0b105645b52769";
 
 export const LocationList = () => {
   const { getLocations, getMatchedLocations } = useContext(LocationContext);
-  const { profiles, getProfiles, currentProfile, getCurrentProfile } =
-    useContext(ProfileContext);
 
   const [city, setCity] = useState("");
   const [result, setResult] = useState({});
   const [isHidden, setIsHidden] = useState(true);
   const [matchedLocations, setMatchedLocations] = useState([]);
-
-  const history = useHistory();
 
   useEffect(async () => {
     getLocations().then(() =>
@@ -51,16 +47,6 @@ export const LocationList = () => {
     setResult(main);
   };
 
-  // const handleGetWeather = () => {
-  //   setCity(locationMatch.name).then(() => getWeather())
-  // }
-  /**
-   * Trying to display a list of buttons for each location related to the current user
-   *  on click: the value={city} gets set to the location.name tied to the button
-   * Need to convert the data to only an array of locations
-   *  then we can map over the result to display the correct buttons
-   */
-
   return (
     <>
       <div className="forecast__background">
@@ -70,7 +56,6 @@ export const LocationList = () => {
             {matchedLocations.map((locationMatch) => {
               return (
                 <button
-                  // type="submit"
                   onClick={() => setCity(locationMatch.name)}
                   key={locationMatch.name}
                 >

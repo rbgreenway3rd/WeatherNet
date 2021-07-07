@@ -9,8 +9,6 @@ import { ProfileProvider } from "./profiles/ProfilesProvider";
 import { ProfileDetail } from "./profiles/ProfileDetail";
 
 export const ApplicationViews = () => {
-  // const currentProfileId = localStorage.getItem("weathernet_user");
-
   return (
     <>
       <ProfileProvider>
