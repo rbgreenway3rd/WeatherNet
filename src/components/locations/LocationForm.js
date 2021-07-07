@@ -54,6 +54,7 @@ export const LocationForm = () => {
         name: location.name,
       };
       addLocation(newLocation);
+      history.push("/locations/detail/");
     }
   };
 
