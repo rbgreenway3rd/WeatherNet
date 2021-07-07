@@ -70,7 +70,7 @@ export const LocationList = () => {
             {matchedLocations.map((locationMatch) => {
               return (
                 <button
-                  type="submit"
+                  // type="submit"
                   onClick={() => setCity(locationMatch.name)}
                   key={locationMatch.name}
                 >
@@ -80,7 +80,7 @@ export const LocationList = () => {
             })}
           </div>
           <div className="forecast__form">
-            <form className="forecast__form__submit">
+            <form className="forecast__form__submit" onSubmit={getWeather}>
               <div className="forecast__city__input__div">
                 <label className="forecast__city__input__name">city</label>
                 <input
