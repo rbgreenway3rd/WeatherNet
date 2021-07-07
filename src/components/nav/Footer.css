@@ -1,0 +1,29 @@
+.footer {
+  display: flex;
+  flex-flow: column wrap;
+  /* background-color: rgb(136, 221, 221); */
+  align-items: left;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 1;
+  padding: 0px;
+  overflow-y: hidden;
+}
+
+.footer__item {
+  list-style-type: none;
+  align-items: center;
+  align-content: center;
+  position: relative;
+  border: solid;
+  border-style: double;
+  border-radius: 0.35em;
+  padding: 0.06em;
+}
+
+/* a {
+  color: white;
+  text-decoration: none;
+} */

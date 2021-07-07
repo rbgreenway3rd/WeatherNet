@@ -1,12 +1,27 @@
 .navbar {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: left;
   border: solid;
   border-color: goldenrod;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  background-color: rgb(119, 153, 245);
+  height: 2em;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .navbar__item {
   flex-basis: 20%;
   list-style-type: none;
+  margin-top: 5px;
+  color: black;
+  flex-basis: 20%;
+}
+
+.navbar__link {
+  color: black;
+}
+
+.logout__button {
 }

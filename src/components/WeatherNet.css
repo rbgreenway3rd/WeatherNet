@@ -3,7 +3,14 @@
 
 /*Typography
 --------------------------------------------------------------*/
-body,
+body {
+  color: #404040;
+  font-family: "Comfortaa", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
 button,
 input,
 select,
@@ -25,9 +32,9 @@ h6 {
 }
 
 p {
-  margin-bottom: 1.5em;
+  margin-bottom: 1.2em;
   color: #d6fcff;
-  color: darkslateblue;
+  color: rgb(28, 12, 134);
 }
 
 strong {

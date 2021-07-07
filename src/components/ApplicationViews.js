@@ -8,6 +8,8 @@ import { LocationsDetail } from "./locations/LocationsDetail";
 import { ProfileProvider } from "./profiles/ProfilesProvider";
 import { ProfileDetail } from "./profiles/ProfileDetail";
 
+import { Footer } from "./nav/Footer";
+
 export const ApplicationViews = () => {
   return (
     <>
@@ -31,6 +33,7 @@ export const ApplicationViews = () => {
           </Route>
         </LocationProvider>
       </ProfileProvider>
+      <Footer />
     </>
   );
 };

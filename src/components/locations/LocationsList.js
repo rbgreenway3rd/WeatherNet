@@ -56,6 +56,7 @@ export const LocationList = () => {
             {matchedLocations.map((locationMatch) => {
               return (
                 <button
+                  className="location__buttons__item"
                   onClick={() => setCity(locationMatch.name)}
                   key={locationMatch.name}
                 >
