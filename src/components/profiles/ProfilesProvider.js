@@ -23,15 +23,14 @@ export const ProfileProvider = (props) => {
   };
 
   const updateProfile = (prof) => {
-    return fetch(`http://localhost:8088/profiles/${prof.id}`, {
+    let id = localStorage.getItem("weathernet_user");
+    return fetch(`http://localhost:8088/profiles/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(prof),
-    })
-      .then(getProfiles)
-      .then(getCurrentProfile);
+    }).then(getCurrentProfile);
   };
 
   const getProfileById = (profileId) => {
