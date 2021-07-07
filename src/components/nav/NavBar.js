@@ -33,9 +33,9 @@ export const NavBar = (props) => {
           Locations
         </Link>
       </li>
-      <li className="logout__button">
+      <div className="logout__button">
         <button onClick={logout}>Logout</button>
-      </li>
+      </div>
     </ul>
   );
 };
