@@ -7,7 +7,7 @@ import "./LocationsDetail.css";
 import { useHistory } from "react-router-dom";
 
 export const LocationsDetail = () => {
-  const { deleteLocationFromProfile, getLocations, getMatchedLocations } =
+  const { deleteLocation, getLocations, getMatchedLocations } =
     useContext(LocationContext);
   const { currentProfile, updateProfile } = useContext(ProfileContext);
 
@@ -34,11 +34,24 @@ export const LocationsDetail = () => {
       })
     );
   }, []);
-  console.log("matched locations: LocDet ===>", matchedLocations);
 
+  // let matchedLocationToDelete = {};
   const handleDeleteLocation = (id) => {
-    deleteLocationFromProfile(currentProfile, id);
-    updateProfile(currentProfile);
+    deleteLocation(id).then(() => getMatchedLocations());
+
+    // getMatchedLocations().then((res) => {
+    //   matchedLocationToDelete = res.map((matchedLocationToDeleteResult) => {
+    //     if (matchedLocationToDeleteResult.locationId === id) {
+    //       return matchedLocationToDeleteResult;
+    //     }
+    //   });
+    //   console.log(matchedLocationToDelete);
+    // });
+    // deleteLocationFromProfile(currentProfile, id)
+
+    // deleteLocationFromLocationMatcher(matchedLocationToDelete.id).then(() =>
+    //   updateProfile(currentProfile)
+    // );
   };
 
   // const renderLocations = () => {

@@ -37,20 +37,12 @@ export const LocationProvider = (props) => {
     );
   };
 
-  const deleteLocationFromProfile = (prof, id) => {
-    let index = prof.savedCityId.indexOf(id);
-    if (index > -1) {
-      prof.savedCityId.splice(index, 1);
-    }
-  };
-
-  const deleteLocation = (locationId) => {
-    return fetch("http://localhost:8088/profiles")
-      .then((res) => res.json())
-      .then((re) => {
-        setProfiles(re);
-      });
-  };
+  // const deleteLocationFromProfile = () => {
+  //   const id = localStorage.getItem("weathernet_user");
+  //   return fetch(``, {
+  //     method: "DELETE",
+  //   }).then();
+  // };
 
   const getMatchedLocations = () => {
     const id = localStorage.getItem("weathernet_user");
@@ -87,6 +79,12 @@ export const LocationProvider = (props) => {
     );
   };
 
+  const deleteLocation = (locationId) => {
+    return fetch(`http://localhost:8088/locations/${locationId}`, {
+      method: "DELETE",
+    }).then(getMatchedLocations);
+  };
+
   return (
     <LocationContext.Provider
       value={{
@@ -95,7 +93,6 @@ export const LocationProvider = (props) => {
         addLocation,
         getLocationById,
         deleteLocation,
-        deleteLocationFromProfile,
         getMatchedLocations,
         addLocationToLocationMatcher,
       }}
