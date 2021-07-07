@@ -24,6 +24,19 @@
   flex-direction: column;
 }
 
+.forecast__form__getForecast {
+  margin: 0.5em;
+  margin-left: 2.5em;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 1em;
+}
+
+.forecast__form__showMoreInfo {
+  font-size: 0.85em;
+}
+
 .forecast__city__input__div {
   padding-bottom: 0.25em;
   display: flex;
@@ -35,6 +48,10 @@
 .forecast__result__simple {
   align-content: left;
   justify-content: left;
+}
+
+.forecast__result__advanced {
+  font-size: 0.9em;
 }
 
 .location__buttons {

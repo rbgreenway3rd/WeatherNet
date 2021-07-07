@@ -7,10 +7,7 @@ import { useHistory } from "react-router-dom";
 
 export const LocationForm = () => {
   const { addLocation } = useContext(LocationContext);
-  const { locations, getLocations, addLocationToLocationMatcher } =
-    useContext(LocationContext);
-  const { addLocationToProfile, currentProfile, getCurrentProfile } =
-    useContext(ProfileContext);
+  const { getCurrentProfile } = useContext(ProfileContext);
 
   const [location, setLocation] = useState({
     name: "",
@@ -26,27 +23,14 @@ export const LocationForm = () => {
 
   console.log("outside useEffect");
 
-  //when a field changes, update state. The return will re-render and display based on the values in state
-  //Controlled component
   const handleControlledInputChange = (event) => {
-    /* When changing a state object or array,
-    always create a copy, make changes, and then set state.*/
     const newLocation = { ...location };
-
-    /*Set the property to the new value
-    using object bracket notation. */
-
     newLocation[event.target.id] = event.target.value;
-    // update state
     setLocation(newLocation);
   };
 
   const handleClickSaveLocation = (event) => {
-    event.preventDefault(); //Prevents the browser from submitting the form
-
-    // const locationId = parseInt(location.id)
-    // const profileId = parseInt(profile.id)
-
+    event.preventDefault();
     if (location.name === "") {
       window.alert("Please Give a Name for the New Location");
     } else {
@@ -57,18 +41,6 @@ export const LocationForm = () => {
       history.push("/locations/detail/");
     }
   };
-
-  /**
-   * first we need the currently logged in user's id.
-   *    this can be retrieved through localStorage
-   * We need a way to capture the new location name
-   *    this can be done through 'handleControlInputChange'
-   * We need the id of the new location before creating the relationship
-   *    addLocation
-   *    collect new location id (from the POST's response)
-   * Now create a relationship object that contains the user's id and the new location id
-   *
-   */
 
   return (
     <form className="locationForm">
