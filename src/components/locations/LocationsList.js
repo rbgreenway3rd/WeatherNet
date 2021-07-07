@@ -51,6 +51,9 @@ export const LocationList = () => {
     setResult(main);
   };
 
+  // const handleGetWeather = () => {
+  //   setCity(locationMatch.name).then(() => getWeather())
+  // }
   /**
    * Trying to display a list of buttons for each location related to the current user
    *  on click: the value={city} gets set to the location.name tied to the button
@@ -66,12 +69,18 @@ export const LocationList = () => {
           <div className="location__buttons">
             {matchedLocations.map((locationMatch) => {
               return (
-                <button key={locationMatch.name}>{locationMatch.name}</button>
+                <button
+                  type="submit"
+                  onClick={() => setCity(locationMatch.name)}
+                  key={locationMatch.name}
+                >
+                  {locationMatch.name}
+                </button>
               );
             })}
           </div>
           <div className="forecast__form">
-            <form className="forecast__form__submit" onSubmit={getWeather}>
+            <form className="forecast__form__submit">
               <div className="forecast__city__input__div">
                 <label className="forecast__city__input__name">city</label>
                 <input
@@ -80,7 +89,9 @@ export const LocationList = () => {
                   onChange={(e) => setCity(e.target.value)}
                 />
               </div>
-              <button type="submit">get weather</button>
+              <button className="forecast__form__getForecast" type="submit">
+                Get Forecast
+              </button>
             </form>
             {result && (
               <div className="forecast__results">
@@ -94,8 +105,13 @@ export const LocationList = () => {
                   <p>low: {result.temp_min}</p>
                 </div>
                 <div className="forecast__result__advanced">
-                  <button onClick={() => showHideDiv()}>Show More Info:</button>
-                  <div hidden={isHidden}>
+                  <button
+                    className="forecast__form__showMoreInfo"
+                    onClick={() => showHideDiv()}
+                  >
+                    Show More Info:
+                  </button>
+                  <div className="forecast__result__advanced" hidden={isHidden}>
                     <p>humidity: {result.humidity}</p>
                     <p>visibility: {result.visibility}</p>
                     <p>wind speed: {result.speed}</p>
